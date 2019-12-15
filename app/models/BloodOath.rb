@@ -2,7 +2,7 @@ class BloodOath
 
     @@all = []
 
-    attr_reader :cult, :follower
+    attr_reader :cult, :follower, :initiation_date
 
     def initialize(cult:, follower:)
         @cult = cult
@@ -19,6 +19,10 @@ class BloodOath
         unless BloodOath.all.find { |oath| oath.follower == self.follower && oath.cult == self.cult }
             @@all << self
         end 
+    end
+
+    def self.first_oath
+       self.all.min_by { |oath| oath.initiation_date } 
     end
 
 end
